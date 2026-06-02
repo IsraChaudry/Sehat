@@ -65,7 +65,11 @@ def intake_agent(state: SEHATState) -> SEHATState:
             if val is not None and str(val).strip() not in ("", "null", "None"):
                 state[field] = val
 
-        state["missing_fields"] = data.get("missing_fields", [])
+        # Always derive missing_fields from actual state — never trust the LLM's list
+        state["missing_fields"] = [
+            f for f in ["patient_name", "patient_age", "complaint", "duration", "severity"]
+            if not state.get(f)
+        ]
         state["language"] = data.get("language", "en")
         state["next_response"] = data.get("response", "Please continue.")
         state["attempts"] = state.get("attempts", 0) + 1
