@@ -74,8 +74,17 @@ def intake_agent(state: SEHATState) -> SEHATState:
         state["next_response"] = data.get("response", "Please continue.")
         state["attempts"] = state.get("attempts", 0) + 1
 
-        if data.get("escalate"):
+        # Hard-coded emergency keyword check — never trust the LLM alone for this
+        _emergency_keywords = [
+            "chest pain", "heart attack", "can't breathe", "cannot breathe",
+            "not breathing", "unconscious", "unresponsive", "severe bleeding",
+            "stroke", "seene mein dard", "sans nahi", "104f", "104 fever",
+            "sans nhi", "saans nahi",
+        ]
+        user_text_lower = last_user_message.lower()
+        if data.get("escalate") or any(kw in user_text_lower for kw in _emergency_keywords):
             state["escalate_to_human"] = True
+            state["triage_level"] = "EMERGENCY"
             state["escalation_reason"] = "Emergency keywords detected during intake"
 
         if data.get("complete") or len(state["missing_fields"]) == 0:

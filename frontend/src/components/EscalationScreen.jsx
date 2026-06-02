@@ -2,6 +2,7 @@ export default function EscalationScreen({ escalationData, patientData, onTakeOv
   const message = escalationData?.escalation_message || 'This patient requires immediate human attention.';
   const collected = escalationData?.collected_info || '';
   const decision = escalationData?.decision_needed || 'Please assess this patient and assign a department manually.';
+  const isEmergency = patientData?.triage_level === 'EMERGENCY';
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 slide-up">
@@ -15,8 +16,15 @@ export default function EscalationScreen({ escalationData, patientData, onTakeOv
               <line x1="12" y1="17" x2="12.01" y2="17" />
             </svg>
           </div>
-          <div>
-            <div className="font-bold text-base mb-1">Human Assistance Required</div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="font-bold text-base">Human Assistance Required</span>
+              {isEmergency && (
+                <span className="bg-white text-[#E24B4A] text-xs font-black px-2 py-0.5 rounded-full tracking-wide">
+                  EMERGENCY
+                </span>
+              )}
+            </div>
             <p className="text-sm opacity-90 leading-relaxed">{message}</p>
           </div>
         </div>
