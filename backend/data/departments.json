@@ -1,0 +1,12 @@
+{
+  "departments": [
+    { "name": "Emergency", "keywords": ["emergency", "unconscious", "severe bleeding", "not breathing", "stroke"] },
+    { "name": "Cardiology", "keywords": ["chest pain", "heart", "palpitations", "arm numbness", "left arm"] },
+    { "name": "Orthopedics", "keywords": ["bone", "fracture", "joint", "knee", "back pain", "spine"] },
+    { "name": "Pediatrics", "keywords": ["child", "baby", "infant", "toddler", "years old child", "fever child"] },
+    { "name": "Gynecology", "keywords": ["pregnancy", "menstrual", "ovary", "uterus", "gynecology"] },
+    { "name": "ENT", "keywords": ["ear", "nose", "throat", "hearing", "tonsil", "sinus"] },
+    { "name": "Neurology", "keywords": ["headache", "migraine", "seizure", "numbness", "dizziness", "memory"] },
+    { "name": "General OPD", "keywords": ["fever", "cough", "cold", "stomach", "diarrhea", "vomiting", "pain"] }
+  ]
+}
