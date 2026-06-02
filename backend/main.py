@@ -56,9 +56,16 @@ init_db()
 
 app = FastAPI(title="SEHAT API", description="Smart Entry & Healthcare Admission Triage")
 
+_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://sehat-red.vercel.app",
+    "https://sehat-git-main-isra-s-projects3.vercel.app",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=_ALLOWED_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )
