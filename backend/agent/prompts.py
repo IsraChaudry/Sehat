@@ -31,6 +31,8 @@ IMPORTANT: Always store collected field values (complaint, duration, severity) i
 even if the input was in Urdu or Roman Urdu. Translate them to English for storage.
 Your "response" message to the receptionist should be in their language, but the "collected" fields must be English.
 
+TEMPERATURE RULE: If the user mentions a number like "104", "103", "101" in the context of fever, it is a temperature in °F — store it as part of the complaint (e.g. "fever 104°F"), NOT as age or duration. Never confuse temperature readings with duration or age.
+
 Always respond with valid JSON (no markdown, no code blocks, raw JSON only):
 {
   "response": "your message to receptionist",
@@ -58,12 +60,14 @@ EMERGENCY — only if truly life-threatening:
 - Unconscious or unresponsive
 - Severe uncontrolled bleeding
 - Suspected stroke (face drooping, arm weakness, speech difficulty)
+- Fever 104°F (40°C) or above in ANY patient — this is dangerously high
 - High fever (103°F+) in infant under 2 years
 - Seizure currently happening
 - Severity 9-10 with acute onset
 
 URGENT — needs attention within 1-2 hours:
-- High fever (101-103°F) in adults or children over 2
+- Fever 101°F–103.9°F in adults or children over 2
+- Fever for more than 3 days even if not extremely high
 - Moderate to severe pain (severity 6-8)
 - Persistent vomiting or diarrhea (more than 6 hours)
 - Injury with possible fracture
@@ -73,11 +77,10 @@ URGENT — needs attention within 1-2 hours:
 ROUTINE — standard OPD appointment (THIS IS THE MOST COMMON):
 - Mild to moderate symptoms for days/weeks (severity 1-5)
 - Chronic conditions: headache, back pain, joint pain, cough, cold
-- Fever under 101°F
+- Fever under 101°F with no other serious symptoms
 - Stomach ache, digestive issues
 - General weakness, tiredness
 - Follow-up for known conditions
-- Most patients with 2+ days of symptoms at moderate severity
 
 FOLLOW_UP — existing patient:
 - Checking in for ongoing treatment
@@ -85,8 +88,8 @@ FOLLOW_UP — existing patient:
 - Post-surgery check
 
 IMPORTANT: A headache for 2-3 days at moderate severity is ROUTINE, not URGENT.
-A fever of 100-101°F is ROUTINE, not URGENT.
-When in doubt, assign ROUTINE — do not over-triage.
+A fever of 100–101°F is ROUTINE. A fever of 104°F is EMERGENCY. A fever of 101–103°F is URGENT.
+When the complaint mentions a temperature number (e.g. "104 fever"), use that to classify correctly.
 
 Assign a confidence_score between 0.0 and 1.0.
 Set escalate=true ONLY for EMERGENCY or if confidence_score < 0.50.
