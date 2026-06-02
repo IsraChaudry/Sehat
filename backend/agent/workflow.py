@@ -6,7 +6,7 @@ from agent.agents import intake_agent, triage_agent, routing_agent, escalation_a
 def intake_router(state: SEHATState) -> str:
     if state.get("escalate_to_human"):
         return "escalation"
-    if state.get("attempts", 0) >= 5:
+    if state.get("attempts", 0) >= 10:
         return "triage"
     if len(state.get("missing_fields", [])) == 0:
         return "triage"
