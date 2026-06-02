@@ -143,6 +143,11 @@ async def chat(request: ChatRequest):
     state["messages"].append({"role": "user", "content": request.message})
 
     result = sehat_workflow.invoke(state)
+
+    # Store SEHAT's response so the next intake call has Q&A context
+    if result.get("next_response"):
+        result["messages"].append({"role": "sehat", "content": result["next_response"]})
+
     sessions[session_id] = result
 
     # Save to DB when routing completes or escalation triggers
