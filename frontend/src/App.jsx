@@ -183,6 +183,7 @@ export default function App() {
                 patientData={patientData}
                 onConfirm={confirmSummary}
                 onEdit={() => setScreen('chat')}
+                onFieldEdit={(key, value) => setPatientData(prev => ({ ...prev, [key]: value }))}
               />
             </div>
           )}
