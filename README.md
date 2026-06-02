@@ -1,6 +1,6 @@
 # SEHAT — Smart Entry & Healthcare Admission Triage
 
-AI-powered hospital receptionist assistant built for Rayn Group case study.
+AI-powered hospital receptionist assistant.
 
 ## Quick Start
 
@@ -8,7 +8,7 @@ AI-powered hospital receptionist assistant built for Rayn Group case study.
 ```bash
 cd backend
 pip install -r requirements.txt
-# Edit .env and add your GEMINI_API_KEY
+# Edit .env and add your GROQ_API_KEY
 uvicorn main:app --reload --port 8000
 ```
 
