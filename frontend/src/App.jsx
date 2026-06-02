@@ -50,7 +50,7 @@ export default function App() {
     setMessages((prev) => [...prev, { role: 'user', text }]);
 
     try {
-      const res = await fetch('http://localhost:8000/chat', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ session_id: sessionId, message: text, language }),
@@ -114,7 +114,7 @@ export default function App() {
     // Clear backend session
     if (sessionId) {
       try {
-        await fetch(`http://localhost:8000/session/${sessionId}`, { method: 'DELETE' });
+        await fetch(`${import.meta.env.VITE_API_URL}/session/${sessionId}`, { method: 'DELETE' });
       } catch (_) {}
     }
     setScreen('chat');

@@ -14,7 +14,7 @@ export default function RecordsDashboard({ token, onLogout }) {
   const fetchRecords = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8000/records', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/records`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.status === 401) { onLogout(); return; }
