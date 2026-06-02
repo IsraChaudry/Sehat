@@ -193,6 +193,7 @@ export default function App() {
               <SlipScreen
                 patientData={patientData}
                 onNewPatient={resetSession}
+                onEdit={() => setScreen('summary')}
               />
             </div>
           )}

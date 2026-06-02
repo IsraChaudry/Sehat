@@ -1,6 +1,6 @@
 import TriageBadge from './TriageBadge';
 
-export default function SlipScreen({ patientData, onNewPatient }) {
+export default function SlipScreen({ patientData, onNewPatient, onEdit }) {
   const handlePrint = () => window.print();
 
   const rows = [
@@ -52,13 +52,21 @@ export default function SlipScreen({ patientData, onNewPatient }) {
       </div>
 
       {/* Buttons */}
-      <div className="action-buttons flex gap-3 mt-5">
+      <div className="action-buttons flex gap-3 mt-5 flex-wrap">
         <button
           onClick={onNewPatient}
-          className="flex-1 py-3 rounded-xl border-2 border-[#1D9E75] text-[#1D9E75] font-semibold text-sm hover:bg-[#1D9E75]/5 transition"
+          className="flex-1 py-3 rounded-xl border-2 border-gray-300 text-gray-600 font-semibold text-sm hover:bg-gray-50 transition"
         >
           New Patient
         </button>
+        {onEdit && (
+          <button
+            onClick={onEdit}
+            className="flex-1 py-3 rounded-xl border-2 border-[#1D9E75] text-[#1D9E75] font-semibold text-sm hover:bg-[#1D9E75]/5 transition"
+          >
+            Edit Details
+          </button>
+        )}
         <button
           onClick={handlePrint}
           className="flex-1 py-3 rounded-xl bg-[#1D9E75] text-white font-semibold text-sm hover:bg-[#18896a] transition shadow-sm active:scale-95"
